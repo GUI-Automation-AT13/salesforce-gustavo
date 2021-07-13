@@ -26,23 +26,47 @@ public class LoginPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(loginBtn));
     }
 
+    /**
+     * Sets user name to login salesforce.
+     *
+     * @param userName name of user
+     */
     public void setUserName(final String userName) {
         userNameTxtBox.sendKeys(userName);
     }
 
+    /**
+     * Sets user password to login salesforce.
+     *
+     * @param password password of user
+     */
+    @SuppressWarnings("checkstyle:JavadocMethod")
     public void setPassword(final String password) {
         passwordTxtBox.sendKeys(password);
     }
 
+    /**
+     * Click button login.
+     */
     public void clickLoginButton() {
         loginBtn.click();
     }
 
+    /**
+     * Goes to classic salesforce.
+     *
+     * @return workTypeClassicPage is work type page in classic
+     */
     public WorkTypeClassicPage goToClassic() {
         driver.get(Urls.WORK_TYPE_CLASSIC.getValue());
         return new WorkTypeClassicPage(driver);
     }
 
+    /**
+     * Goes to lightning salesforce.
+     *
+     * @return workTypeLightningPage is work type page in lightning
+     */
     public WorkTypeLightningPage goToLightning() {
         driver.get(Urls.WORK_TYPE_LIGHTNING.getValue());
         return new WorkTypeLightningPage(driver);

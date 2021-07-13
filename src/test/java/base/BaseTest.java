@@ -6,10 +6,9 @@ import org.testng.annotations.BeforeClass;
 import salesforce.LoginPage;
 import salesforce.Urls;
 import salesforce.UserDate;
-import utilities.Browser;
 
 public class BaseTest {
-    private Interact interact = new Interact(Browser.CHROME);
+    private Interact interact = new Interact();
     protected LoginPage loginPage;
 
     @BeforeClass

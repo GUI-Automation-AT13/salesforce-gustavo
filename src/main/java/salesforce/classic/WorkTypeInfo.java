@@ -19,6 +19,11 @@ public class WorkTypeInfo extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(nameWorkTypeTxt));
     }
 
+    /**
+     * Gets the name of work type.
+     *
+     * @return name of worktype.
+     */
     public String getNameOfWorkType() {
         return nameWorkTypeTxt.getText();
     }

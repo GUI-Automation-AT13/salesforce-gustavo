@@ -2,14 +2,14 @@ package gui;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import utilities.Browser;
+import salesforce.SetUp;
 
 public class Interact {
     private WebDriver driver;
     private GuiSetting guiSetting = new GuiSetting();
 
-    public Interact(final Browser browser) {
-        driver = guiSetting.setBrowser(browser);
+    public Interact() {
+        driver = guiSetting.setBrowser(SetUp.BROWSER.getValue());
     }
 
     /**

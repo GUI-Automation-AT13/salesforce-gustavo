@@ -20,14 +20,21 @@ public class WorkTypeClassicPage extends BasePage {
 
     @Override
     protected void waitForPageLoaded() {
-        System.out.println("Entrooo");
         wait.until(ExpectedConditions.visibilityOf(newBtn));
     }
 
+    /**
+     * closes announcement window.
+     */
     public void closeAnnouncement() {
         closeAnnouncement.click();
     }
 
+    /**
+     * Changes the page to create work type.
+     *
+     * @return workTypeForm initialize.
+     */
     public WorkTypeForm clickNewButton() {
         newBtn.click();
         return new WorkTypeForm(driver);

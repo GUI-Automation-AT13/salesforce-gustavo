@@ -25,14 +25,29 @@ public class WorkTypeForm extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(nameTxtBox));
     }
 
+    /**
+     * Sets the name of work type.
+     *
+     * @param workTypeName
+     */
     public void setNameTxtBox(final String workTypeName) {
         nameTxtBox.sendKeys(workTypeName);
     }
 
+    /**
+     * Sets the estimated duration of work type.
+     *
+     * @param estimatedDuration
+     */
     public void setEstimatedDurationTxtBox(final String estimatedDuration) {
         estimatedDurationTxtBox.sendKeys(estimatedDuration);
     }
 
+    /**
+     * Actions to click save button.
+     *
+     * @return WorkTypeInfo which is to pass other page.
+     */
     public WorkTypeInfo clickSaveButton() {
         saveBtn.click();
         return new WorkTypeInfo(driver);

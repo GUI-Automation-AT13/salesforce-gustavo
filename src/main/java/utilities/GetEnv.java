@@ -7,9 +7,13 @@ public final class GetEnv {
             .ignoreIfMalformed().ignoreIfMissing().load();
 
     private GetEnv() {
-        //not called
     }
 
+    /**
+     * Gets value of external files.
+     *
+     * @return object with value of external files.
+     */
     public static Dotenv envVariable() {
         return dotenv;
     }
