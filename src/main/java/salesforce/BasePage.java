@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public abstract class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
-    private final int timeOutInSeconds = 30;
+    private int timeOutInSeconds = Integer.parseInt(SetUp.WAIT_TYPE.getValue());
     public BasePage(final WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, timeOutInSeconds);

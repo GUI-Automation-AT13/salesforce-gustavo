@@ -11,6 +11,5 @@ public class WorkTypeLightningPage extends BasePage {
 
     @Override
     protected void waitForPageLoaded() {
-
     }
 }
