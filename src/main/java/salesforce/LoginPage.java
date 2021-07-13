@@ -40,7 +40,6 @@ public class LoginPage extends BasePage {
      *
      * @param password password of user
      */
-    @SuppressWarnings("checkstyle:JavadocMethod")
     public void setPassword(final String password) {
         passwordTxtBox.sendKeys(password);
     }

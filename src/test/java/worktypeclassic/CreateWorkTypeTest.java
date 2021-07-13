@@ -6,7 +6,9 @@ import salesforce.classic.WorkTypeClassicPage;
 import salesforce.classic.WorkTypeForm;
 import salesforce.classic.WorkTypeInfo;
 import static org.testng.Assert.assertEquals;
+
 public class CreateWorkTypeTest extends BaseTest {
+
     public void createWorkTypeToClassicSalesforce() {
         WorkTypeClassicPage workType = loginPage.goToClassic();
         workType.closeAnnouncement();
