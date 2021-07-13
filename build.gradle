@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'checkstyle'
 }
 
 group 'org.example'
@@ -16,9 +17,24 @@ dependencies {
     compile group: 'io.github.cdimascio', name: 'java-dotenv', version: '5.2.2'
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.29'
     testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
-    //implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '4.4.3'
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '4.4.3'
 }
 
+checkstyle {
+    toolVersion '8.34'
+    configFile file('checkstyle.xml')
+    checkstyleMain.source = "src/main/"
+    checkstyleMain.excludes = ["**/src/test/**"]
+}
+
+checkstyleMain {
+    source = 'src/main/java'
+}
+
+checkstyleTest {
+    source = 'src/main/java'
+}
+test.finalizedBy("checkstyleMain")
 test {
-    useJUnitPlatform()
+    useTestNG()
 }
