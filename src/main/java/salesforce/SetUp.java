@@ -1,6 +1,6 @@
 package salesforce;
 
-import static utilities.GetEnv.envVariable;
+import static core.utilities.GetEnv.envVariable;
 
 public enum SetUp {
     WAIT_TYPE(envVariable().get("WAIT_TYPE")),

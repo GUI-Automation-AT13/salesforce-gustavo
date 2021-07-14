@@ -1,15 +1,29 @@
-package gui;
+package core.selenium;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import salesforce.SetUp;
 
-public class Interact {
-    private WebDriver driver;
-    private GuiSetting guiSetting = new GuiSetting();
+public final class WebDriverManager {
+    private static WebDriver driver;
+    private static Browser browser = new Browser();
+    private static WebDriverManager instance = null;
 
-    public Interact() {
-        driver = guiSetting.setBrowser(SetUp.BROWSER.getValue());
+    private WebDriverManager() {
+    }
+
+    /**
+     * Constructor of Interact.
+     * Gets Interact as Singleton.
+     *
+     * @return a instance
+     */
+    public static WebDriverManager getInstance() {
+        if (instance == null) {
+            instance = new WebDriverManager();
+            driver = browser.setBrowser(SetUp.BROWSER.getValue());
+        }
+        return instance;
     }
 
     /**
@@ -24,7 +38,7 @@ public class Interact {
     /**
      * Sets size of windows.
      *
-     * @param width of windows.
+     * @param width  of windows.
      * @param height of windows.
      */
     public void windowsSize(final int width, final int height) {

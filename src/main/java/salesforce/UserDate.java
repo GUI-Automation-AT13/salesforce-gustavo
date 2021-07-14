@@ -1,6 +1,6 @@
 package salesforce;
 
-import static utilities.GetEnv.envVariable;
+import static core.utilities.GetEnv.envVariable;
 
 public enum UserDate {
     USERNAME(envVariable().get("USERNAME_VALUE")),

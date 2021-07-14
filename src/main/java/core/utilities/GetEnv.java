@@ -1,8 +1,9 @@
-package utilities;
+package core.utilities;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
 public final class GetEnv {
+    private static GetEnv getEnv = null;
     private static Dotenv dotenv = Dotenv.configure().filename(".user.data")
             .ignoreIfMalformed().ignoreIfMissing().load();
 
