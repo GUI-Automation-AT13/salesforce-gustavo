@@ -28,7 +28,7 @@ public class WorkTypeForm extends BasePage {
     /**
      * Sets the name of work type.
      *
-     * @param workTypeName
+     * @param workTypeName is name work type
      */
     public void setNameTxtBox(final String workTypeName) {
         nameTxtBox.sendKeys(workTypeName);
@@ -37,7 +37,7 @@ public class WorkTypeForm extends BasePage {
     /**
      * Sets the estimated duration of work type.
      *
-     * @param estimatedDuration
+     * @param estimatedDuration is time estimate duration of work type
      */
     public void setEstimatedDurationTxtBox(final String estimatedDuration) {
         estimatedDurationTxtBox.sendKeys(estimatedDuration);
