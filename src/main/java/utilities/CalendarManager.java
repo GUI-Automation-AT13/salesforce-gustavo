@@ -52,7 +52,6 @@ public class CalendarManager {
      * of enum DateFormatInput.
      *
      * @param input is value which will convert to date
-     * @return object type Date
      */
     private void isRightDateAccordingConventions(final String input) {
         String[] divide = input.toLowerCase().split(" ", 2);
