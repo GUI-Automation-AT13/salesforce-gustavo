@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.text.DateFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CalendarManager {
     private String dateActualComplete;
@@ -22,20 +24,26 @@ public class CalendarManager {
      * @param input is value which will convert to date
      * @return object type Date
      */
-    public Date converterStringToDate(final String input) {
-        try {
-            if (isOnlyWord(input)) {
-                managerInputs();
-                return result();
-            }
-            if (isRightDateAccordingConventions(input)) {
-                managerInputs();
-                return result();
-            }
-            return resultRightFormat(input);
-        } catch (ParseException e) {
-            throw new RuntimeException("The value is not valid");
+    public Date convertStringToDate(final String input) throws ParseException {
+        if (input == null) {
+            throw new RuntimeException("Invalid value or date");
         }
+        String[] analise = input.split(" ");
+        generateDateActual();
+        if (analise.length > 1) {
+            isRightDateAccordingConventions(input);
+            managerInputs();
+            return getResult();
+        } else {
+            if (isValidateFormatAndDate(input)) {
+                return resultRightFormat(input);
+            }
+            if (isOnlyWordInput(input)) {
+                managerInputs();
+                return getResult();
+            }
+        }
+        throw new RuntimeException("Invalid value or date");
     }
 
     /**
@@ -46,21 +54,16 @@ public class CalendarManager {
      * @param input is value which will convert to date
      * @return object type Date
      */
-    private boolean isRightDateAccordingConventions(final String input) {
-        try {
-            String[] divide = input.split(" ", 2);
-            dates = Integer.parseInt(divide[0]);
-            String fillUpLowBar = divide[1].replace(' ', '_');
-            dateFormat = DateFormatInput.valueOf(fillUpLowBar);
-            if ((dateFormat.isSingular() && dates != 1) | (!dateFormat.isSingular() && dates == 1) | dates < 0) {
-                return false;
-            }
-            if (fillUpLowBar.contains("ago")) {
-                dates = -dates;
-            }
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+    private void isRightDateAccordingConventions(final String input) {
+        String[] divide = input.toLowerCase().split(" ", 2);
+        dates = Integer.parseInt(divide[0]);
+        String fillUpLowBar = divide[1].replace(' ', '_');
+        dateFormat = DateFormatInput.valueOf(fillUpLowBar);
+        if ((dateFormat.isSingular() && dates != 1) | (!dateFormat.isSingular() && dates == 1) | dates < 0) {
+            throw new RuntimeException("The value is incorrectly entered or has negative number");
+        }
+        if (fillUpLowBar.contains("ago")) {
+            dates = -dates;
         }
     }
 
@@ -71,8 +74,7 @@ public class CalendarManager {
      * @param input input is value which will convert to date
      * @return object type Date
      */
-    private boolean isOnlyWord(final String input) {
-        generateDateActual();
+    private boolean isOnlyWordInput(final String input) {
         if (input.equals("TODAY")) {
             dates = 0;
             dateFormat = DateFormatInput.valueOf(input);
@@ -90,7 +92,7 @@ public class CalendarManager {
             dateFormat = DateFormatInput.valueOf(input);
             return true;
         }
-        return false;
+        throw new RuntimeException("The value is not valid, try today, yesterday and tomorrow");
     }
 
     /**
@@ -115,22 +117,22 @@ public class CalendarManager {
      * Sets date according requirement of string.
      */
     private void managerInputs() {
-        if ("year" == dateFormat.getValue()) {
+        if ("year".equals(dateFormat.getValue())) {
             calendarDate.add(Calendar.YEAR, dates);
         }
-        if ("month" == dateFormat.getValue()) {
+        if ("month".equals(dateFormat.getValue())) {
             calendarDate.add(Calendar.MONTH, dates);
         }
-        if ("date" == dateFormat.getValue()) {
+        if ("date".equals(dateFormat.getValue())) {
             calendarDate.add(Calendar.DATE, dates);
         }
-        if ("hour" == dateFormat.getValue()) {
+        if ("hour".equals(dateFormat.getValue())) {
             calendarDate.add(Calendar.HOUR, dates);
         }
-        if ("minute" == dateFormat.getValue()) {
+        if ("minute".equals(dateFormat.getValue())) {
             calendarDate.add(Calendar.MINUTE, dates);
         }
-        if ("second" == dateFormat.getValue()) {
+        if ("second".equals(dateFormat.getValue())) {
             calendarDate.add(Calendar.SECOND, dates);
         }
     }
@@ -140,7 +142,7 @@ public class CalendarManager {
      *
      * @return a date object.
      */
-    private Date result() {
+    private Date getResult() {
         return calendarDate.getTime();
     }
 
@@ -154,5 +156,17 @@ public class CalendarManager {
     private Date resultRightFormat(final String dateString) throws ParseException {
         DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
         return format.parse(dateString);
+    }
+
+    /**
+     * Verify is date is right format.
+     *
+     * @param dateString is the string with a date format
+     * @return boolean if is validate date
+     */
+    private boolean isValidateFormatAndDate(final String dateString) {
+        Pattern pat = Pattern.compile("^(0?[1-9]|1[012])[/-](0?[1-9]|[12][0-9]|3[01])[/-]((19|20)\\d\\d)$");
+        Matcher mat = pat.matcher(dateString);
+        return mat.matches();
     }
 }
