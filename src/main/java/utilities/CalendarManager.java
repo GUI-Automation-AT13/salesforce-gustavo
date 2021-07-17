@@ -25,7 +25,7 @@ public class CalendarManager {
      * @return object type Date
      */
     public Date convertStringToDate(final String input) throws ParseException {
-        if (input == null) {
+        if (input == null | input == "") {
             throw new RuntimeException("Invalid value or date");
         }
         String[] analise = input.split(" ");
@@ -38,12 +38,10 @@ public class CalendarManager {
             if (isValidateFormatAndDate(input)) {
                 return resultRightFormat(input);
             }
-            if (isOnlyWordInput(input)) {
-                managerInputs();
-                return getResult();
-            }
+            onlyWordInput(input);
+            managerInputs();
+            return getResult();
         }
-        throw new RuntimeException("Invalid value or date");
     }
 
     /**
@@ -58,7 +56,13 @@ public class CalendarManager {
         dates = Integer.parseInt(divide[0]);
         String fillUpLowBar = divide[1].replace(' ', '_');
         dateFormat = DateFormatInput.valueOf(fillUpLowBar);
-        if ((dateFormat.isSingular() && dates != 1) | (!dateFormat.isSingular() && dates == 1) | dates < 0) {
+        if (dateFormat.isSingular() && dates != 1) {
+            throw new RuntimeException("The value is incorrectly entered or has negative number");
+        }
+        if (!dateFormat.isSingular() && dates == 1) {
+            throw new RuntimeException("The value is incorrectly entered or has negative number");
+        }
+        if (input.contains("-")) {
             throw new RuntimeException("The value is incorrectly entered or has negative number");
         }
         if (fillUpLowBar.contains("ago")) {
@@ -71,25 +75,24 @@ public class CalendarManager {
      * Only for 3 word, TODAY, YESTERDAY and TOMORROW.
      *
      * @param input input is value which will convert to date
-     * @return object type Date
      */
-    private boolean isOnlyWordInput(final String input) {
+    private void onlyWordInput(final String input) {
         if (input.equals("TODAY")) {
             dates = 0;
             dateFormat = DateFormatInput.valueOf(input);
-            return true;
+            return;
         }
 
         if (input.equals("YESTERDAY")) {
             dates = -1;
             dateFormat = DateFormatInput.valueOf(input);
-            return true;
+            return;
         }
 
         if (input.equals("TOMORROW")) {
             dates = 1;
             dateFormat = DateFormatInput.valueOf(input);
-            return true;
+            return;
         }
         throw new RuntimeException("The value is not valid, try today, yesterday and tomorrow");
     }
@@ -109,7 +112,6 @@ public class CalendarManager {
      */
     private void setCalendarFormat() {
         calendarDate = Calendar.getInstance();
-        calendarDate.setTime(date);
     }
 
     /**
