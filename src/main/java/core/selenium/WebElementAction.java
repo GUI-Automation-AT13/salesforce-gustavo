@@ -2,6 +2,8 @@ package core.selenium;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import salesforce.utilities.SetUp;
@@ -25,8 +27,7 @@ public class WebElementAction {
      * @param text       is string with value to set
      */
     public void setInputField(final WebElement webElement, final String text) {
-        wait.until(ExpectedConditions.visibilityOf(webElement));
-        webElement.clear();
+        waitForElementVisibility(webElement);
         webElement.sendKeys(text);
     }
 
@@ -36,7 +37,6 @@ public class WebElementAction {
      * @param webElement type WebElement object.
      */
     public void clickElement(final WebElement webElement) {
-        wait.until(ExpectedConditions.visibilityOf(webElement));
         webElement.click();
     }
 
@@ -48,5 +48,11 @@ public class WebElementAction {
      */
     public String getText(final WebElement webElement) {
         return webElement.getText();
+    }
+
+    public void selectComboBox(final WebElement webElement, final WebDriver webDriver) {
+        Actions builder = new Actions(webDriver);
+        Action action = builder.click(webElement).build();
+        action.perform();
     }
 }
