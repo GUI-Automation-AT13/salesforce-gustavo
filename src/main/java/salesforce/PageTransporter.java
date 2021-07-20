@@ -2,6 +2,8 @@ package salesforce;
 
 import core.selenium.WebDriverManager;
 import salesforce.classic.WorkTypeClassicPage;
+import salesforce.lightning.WorkTypeLightningPage;
+import salesforce.utilities.Urls;
 
 public final class PageTransporter {
 
@@ -25,5 +27,15 @@ public final class PageTransporter {
     public static WorkTypeClassicPage navigateToWorkTypeClassicPage() {
         goToUrl(Urls.WORK_TYPE_CLASSIC.getValue());
         return new WorkTypeClassicPage(WebDriverManager.getInstance().getDriver());
+    }
+
+    /**
+     * Sets WorkTypeClassicPage object with instance interact.
+     *
+     * @return WorkTypeClassicPage object
+     */
+    public static WorkTypeLightningPage navigateToWorkTypeLightningPage() {
+        goToUrl(Urls.WORK_TYPE_LIGHTNING.getValue());
+        return new WorkTypeLightningPage(WebDriverManager.getInstance().getDriver());
     }
 }

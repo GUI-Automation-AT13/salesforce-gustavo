@@ -3,7 +3,6 @@ package salesforce.classic;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import salesforce.BasePage;
 
 
@@ -20,7 +19,7 @@ public class WorkTypeClassicPage extends BasePage {
 
     @Override
     protected void waitForPageLoaded() {
-        wait.until(ExpectedConditions.visibilityOf(newBtn));
+        webElementAction.waitForElementVisibility(newBtn);
     }
 
     /**

@@ -3,9 +3,9 @@ package salesforce;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import salesforce.classic.WorkTypeClassicPage;
 import salesforce.lightning.WorkTypeLightningPage;
+import salesforce.utilities.Urls;
 
 public class LoginPage extends BasePage {
     @FindBy(id = "username")
@@ -23,7 +23,7 @@ public class LoginPage extends BasePage {
 
     @Override
     protected void waitForPageLoaded() {
-        wait.until(ExpectedConditions.visibilityOf(loginBtn));
+        webElementAction.waitForElementVisibility(loginBtn);
     }
 
     /**

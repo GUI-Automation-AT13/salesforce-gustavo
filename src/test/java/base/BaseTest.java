@@ -5,8 +5,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import salesforce.LoginPage;
 import salesforce.PageTransporter;
-import salesforce.Urls;
-import salesforce.UserDate;
+import salesforce.utilities.Urls;
+import salesforce.utilities.UserDate;
 
 public class BaseTest {
     private WebDriverManager webDriverManager;

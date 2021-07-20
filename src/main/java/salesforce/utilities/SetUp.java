@@ -1,4 +1,4 @@
-package salesforce;
+package salesforce.utilities;
 
 import static core.utilities.GetEnv.envVariable;
 

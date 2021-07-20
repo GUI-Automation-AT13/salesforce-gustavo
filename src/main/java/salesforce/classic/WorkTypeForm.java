@@ -3,7 +3,6 @@ package salesforce.classic;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import salesforce.BasePage;
 
 public class WorkTypeForm extends BasePage {
@@ -22,7 +21,7 @@ public class WorkTypeForm extends BasePage {
 
     @Override
     protected void waitForPageLoaded() {
-        wait.until(ExpectedConditions.visibilityOf(nameTxtBox));
+        webElementAction.waitForElementVisibility(nameTxtBox);
     }
 
     /**

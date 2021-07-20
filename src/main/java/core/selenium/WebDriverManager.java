@@ -2,7 +2,7 @@ package core.selenium;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import salesforce.SetUp;
+import salesforce.utilities.SetUp;
 
 public final class WebDriverManager {
     private static WebDriver driver;
