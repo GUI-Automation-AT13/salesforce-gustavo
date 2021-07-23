@@ -70,7 +70,7 @@ public class CalendarManagerTests {
     }
 
     @Test(expectedExceptions = RuntimeException.class,
-            expectedExceptionsMessageRegExp = "The value is incorrectly entered or has negative number")
+            expectedExceptionsMessageRegExp = "The value is incorrectly has to be in singular")
     public void shouldReturnExceptionWithInvalidInputDaysWithOneDay() throws ParseException {
         Date date = calendarManager.convertStringToDate("1 days ago");
     }
@@ -82,7 +82,7 @@ public class CalendarManagerTests {
     }
 
     @Test(expectedExceptions = RuntimeException.class,
-            expectedExceptionsMessageRegExp = "The value is incorrectly entered or has negative number")
+            expectedExceptionsMessageRegExp = "The value is incorrectly has to be in plural")
     public void shouldReturnExceptionToInvalidMonthsNow() throws ParseException {
         Date date = calendarManager.convertStringToDate("5 month from now");
     }

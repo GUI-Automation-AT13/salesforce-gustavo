@@ -57,10 +57,10 @@ public class CalendarManager {
         String fillUpLowBar = divide[1].replace(' ', '_');
         dateFormat = DateFormatInput.valueOf(fillUpLowBar);
         if (dateFormat.isSingular() && dates != 1) {
-            throw new RuntimeException("The value is incorrectly entered or has negative number");
+            throw new RuntimeException("The value is incorrectly has to be in plural");
         }
         if (!dateFormat.isSingular() && dates == 1) {
-            throw new RuntimeException("The value is incorrectly entered or has negative number");
+            throw new RuntimeException("The value is incorrectly has to be in singular");
         }
         if (input.contains("-")) {
             throw new RuntimeException("The value is incorrectly entered or has negative number");
