@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'checkstyle'
+    id 'info.solidsoft.pitest' version '1.5.1'
 }
 
 group 'org.example'
@@ -18,6 +19,14 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.29'
     testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
     implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '4.4.3'
+}
+
+pitest {
+    testPlugin='testng'
+    targetClasses = ['utilities.CalendarManager']
+    targetTests = ['utilities.CalendarManagerTests*']
+    threads = 4
+    outputFormats = ['XML', 'HTML']
 }
 
 checkstyle {
