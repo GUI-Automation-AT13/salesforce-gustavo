@@ -1,7 +1,6 @@
 package salesforce.lightning;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import salesforce.BasePage;
@@ -16,15 +15,17 @@ public class WorkTypeForm extends BasePage {
     private String xpathComboBox;
     private static int countComboBox = 0;
 
-    public WorkTypeForm(final WebDriver driver) {
-        super(driver);
-    }
-
     @Override
     protected void waitForPageLoaded() {
         webElementAction.waitForElementVisibility(estimatedDurationComboBox);
     }
 
+    /**
+     * Sets on text of all field of workType.
+     *
+     * @param fieldName name of textBox
+     * @param fieldValue is value to set on textBox
+     */
     public void setInputField(final String fieldName, final String fieldValue) {
         if ("Description".equals(fieldName)) {
             webElementAction.setInputField(driver.findElement(By.cssSelector(".textarea")), fieldValue);
@@ -66,6 +67,6 @@ public class WorkTypeForm extends BasePage {
      */
     public WorkTypeInfo clickSaveButton() {
         webElementAction.clickElement(saveBtn);
-        return new WorkTypeInfo(driver);
+        return new WorkTypeInfo();
     }
 }

@@ -12,4 +12,14 @@ public class WorkTypeLightningPage extends BasePage {
     protected void waitForPageLoaded() {
         webElementAction.waitForElementVisibility(newBtn);
     }
+
+    /**
+     * Changes the page to create work type.
+     *
+     * @return workTypeForm initialize.
+     */
+    public WorkTypeForm clickNewButton() {
+        webElementAction.clickElement(newBtn);
+        return new WorkTypeForm();
+    }
 }

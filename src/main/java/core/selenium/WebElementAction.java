@@ -29,7 +29,7 @@ public class WebElementAction {
      * Sets a value in a webElement.
      *
      * @param webElement type WebElement object
-     * @param text       is string with value to set
+     * @param text is string with value to set
      */
     public void setInputField(final WebElement webElement, final String text) {
         waitForElementVisibility(webElement);
@@ -52,9 +52,16 @@ public class WebElementAction {
      * @return a text in webElement
      */
     public String getText(final WebElement webElement) {
+        waitForElementVisibility(webElement);
         return webElement.getText();
     }
 
+    /**
+     * Selects a comboBox by webElement.
+     *
+     * @param webElement type WebElement object.
+     * @param webDriver is WebDriver.
+     */
     public void selectComboBox(final WebElement webElement, final WebDriver webDriver) {
         Actions builder = new Actions(webDriver);
         Action action = builder.click(webElement).build();
