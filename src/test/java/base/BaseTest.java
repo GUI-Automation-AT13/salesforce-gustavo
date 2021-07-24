@@ -1,25 +1,27 @@
 package base;
 
-import gui.Interact;
+import core.selenium.WebDriverManager;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import salesforce.LoginPage;
-import salesforce.Urls;
-import salesforce.UserDate;
+import salesforce.PageTransporter;
+import salesforce.utilities.Urls;
+import salesforce.utilities.UserDate;
 
 public class BaseTest {
-    private Interact interact = new Interact();
+    private WebDriverManager webDriverManager;
     protected LoginPage loginPage;
 
     @BeforeClass
     public void setUp() {
-        interact.maximizeScreen();
+        webDriverManager = WebDriverManager.getInstance();
+        webDriverManager.maximizeScreen();
     }
 
     @BeforeClass(dependsOnMethods = "setUp")
     public void loginSalesforce() {
-        interact.setUrl(Urls.PATH_LOGIN.getValue());
-        loginPage = new LoginPage(interact.getDriver());
+        PageTransporter.goToUrl(Urls.PATH_LOGIN.getValue());
+        loginPage = new LoginPage();
         loginPage.setUserName(UserDate.USERNAME.getValue());
         loginPage.setPassword(UserDate.PASSWORD.getValue());
         loginPage.clickLoginButton();
@@ -27,6 +29,6 @@ public class BaseTest {
 
     @AfterClass
     public void tearDown() {
-        interact.quitDriver();
+        webDriverManager.quitDriver();
     }
 }

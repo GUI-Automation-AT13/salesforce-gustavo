@@ -19,6 +19,7 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.29'
     testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
     implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '4.4.3'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-support', version: '3.141.59'
 }
 
 pitest {
@@ -34,6 +35,7 @@ checkstyle {
     configFile file('checkstyle.xml')
     checkstyleMain.source = "src/main/"
     checkstyleMain.excludes = ["**/src/test/**"]
+    checkstyleTest.enabled = false
 }
 
 checkstyleMain {
@@ -43,8 +45,11 @@ checkstyleMain {
 checkstyleTest {
     source = 'src/main/java'
 }
+
 test.finalizedBy("checkstyleMain")
 check.dependsOn build
+
+
 test {
     useTestNG()
 }

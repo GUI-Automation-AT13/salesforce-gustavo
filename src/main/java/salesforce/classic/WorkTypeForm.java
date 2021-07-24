@@ -1,9 +1,7 @@
 package salesforce.classic;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import salesforce.BasePage;
 
 public class WorkTypeForm extends BasePage {
@@ -16,19 +14,15 @@ public class WorkTypeForm extends BasePage {
     @FindBy(name = "save")
     protected WebElement saveBtn;
 
-    public WorkTypeForm(final WebDriver driver) {
-        super(driver);
-    }
-
     @Override
     protected void waitForPageLoaded() {
-        wait.until(ExpectedConditions.visibilityOf(nameTxtBox));
+        webElementAction.waitForElementVisibility(nameTxtBox);
     }
 
     /**
      * Sets the name of work type.
      *
-     * @param workTypeName
+     * @param workTypeName is name work type
      */
     public void setNameTxtBox(final String workTypeName) {
         nameTxtBox.sendKeys(workTypeName);
@@ -37,7 +31,7 @@ public class WorkTypeForm extends BasePage {
     /**
      * Sets the estimated duration of work type.
      *
-     * @param estimatedDuration
+     * @param estimatedDuration is time estimate duration of work type
      */
     public void setEstimatedDurationTxtBox(final String estimatedDuration) {
         estimatedDurationTxtBox.sendKeys(estimatedDuration);
@@ -50,6 +44,6 @@ public class WorkTypeForm extends BasePage {
      */
     public WorkTypeInfo clickSaveButton() {
         saveBtn.click();
-        return new WorkTypeInfo(driver);
+        return new WorkTypeInfo();
     }
 }

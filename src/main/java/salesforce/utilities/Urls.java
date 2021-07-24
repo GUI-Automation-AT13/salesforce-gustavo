@@ -1,4 +1,4 @@
-package salesforce;
+package salesforce.utilities;
 
 public enum Urls {
     PATH_LOGIN("https://login.salesforce.com/"),
