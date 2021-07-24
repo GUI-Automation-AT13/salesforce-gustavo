@@ -8,8 +8,11 @@ import java.text.DateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static core.utilities.GetEnv.envVariable;
+
 public class CalendarManager {
     private String dateActualComplete;
+    private String dataFormat = envVariable().get("DATE_FORMAT");
     private Date date;
     private Calendar calendarDate;
     private int dates;
@@ -29,7 +32,7 @@ public class CalendarManager {
             throw new RuntimeException("Invalid value or date");
         }
         String[] analise = input.split(" ");
-        generateDateActual();
+        generateDateActual(dataFormat);
         if (analise.length > 1) {
             isRightDateAccordingConventions(input);
             managerInputs();
@@ -99,12 +102,16 @@ public class CalendarManager {
 
     /**
      * Generates actual date.
+     *
+     * @param dataFormat is format of data
+     * @return a string with actual date
      */
-    private void generateDateActual() {
-        java.text.DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+    public String generateDateActual(final String dataFormat) {
+        java.text.DateFormat dateFormat = new SimpleDateFormat(dataFormat);
         date = new Date();
         dateActualComplete = dateFormat.format(date);
         setCalendarFormat();
+        return dateActualComplete;
     }
 
     /**
@@ -155,7 +162,7 @@ public class CalendarManager {
      * @throws ParseException if don't convert correctly
      */
     private Date resultRightFormat(final String dateString) throws ParseException {
-        DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        DateFormat format = new SimpleDateFormat(dataFormat);
         return format.parse(dateString);
     }
 
