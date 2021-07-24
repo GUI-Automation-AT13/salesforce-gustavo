@@ -15,7 +15,7 @@ public class WebElementAction {
     }
 
     /**
-     * Waits for element visibility
+     * Waits for element visibility.
      *
      * @param webElement is element to wait
      */

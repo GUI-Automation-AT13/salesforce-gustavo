@@ -4,7 +4,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class FireFox {
+public final class FireFox {
+
+    private FireFox() {
+    }
 
     /**
      * Sets up browser to Firefox.

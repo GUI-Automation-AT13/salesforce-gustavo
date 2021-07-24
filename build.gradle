@@ -26,6 +26,7 @@ checkstyle {
     configFile file('checkstyle.xml')
     checkstyleMain.source = "src/main/"
     checkstyleMain.excludes = ["**/src/test/**"]
+    checkstyleTest.enabled = false
 }
 
 checkstyleMain {
@@ -34,11 +35,12 @@ checkstyleMain {
 
 checkstyleTest {
     source = 'src/main/java'
-    checkstyleTest.enabled = false
-
 }
+
 test.finalizedBy("checkstyleMain")
 check.dependsOn build
+
+
 test {
     useTestNG()
 }

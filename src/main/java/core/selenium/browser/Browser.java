@@ -2,7 +2,7 @@ package core.selenium.browser;
 
 import org.openqa.selenium.WebDriver;
 
-public class Browser {
+public final class Browser {
 
     /**
      * Sets Browser type.
