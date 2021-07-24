@@ -37,17 +37,4 @@ public class ApiResponse {
     public <T> T getBody(final Class<T> cls) {
         return response.getBody().as(cls);
     }
-
-//    public <T> List<T> getBody(Class <T> cls){
-//        return response.getBody().as(cls);
-//    }
-
-//    /**
-//     * Verifies schema with Path setting in String schema.
-//     *
-//     * @param schema is path to schema type json
-//     */
-//    public void validateBodySchema(final String schema) {
-//        response.then().log().body().assertThat().body(matchesJsonSchemaInClasspath(schema));
-//    }
 }
