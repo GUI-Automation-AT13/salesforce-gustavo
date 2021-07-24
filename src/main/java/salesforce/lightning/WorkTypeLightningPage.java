@@ -9,10 +9,6 @@ public class WorkTypeLightningPage extends BasePage {
     @FindBy(xpath = "//a[@class='forceActionLink'][@role='button']")
     protected WebElement newBtn;
 
-    public WorkTypeLightningPage(final WebDriver driver) {
-        super(driver);
-    }
-
     @Override
     protected void waitForPageLoaded() {
         webElementAction.waitForElementVisibility(newBtn);

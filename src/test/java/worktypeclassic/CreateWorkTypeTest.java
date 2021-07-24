@@ -10,7 +10,7 @@ import salesforce.classic.WorkTypeInfo;
 import static org.testng.Assert.assertEquals;
 
 public class CreateWorkTypeTest extends BaseTest {
-
+    @Test
     public void createWorkTypeToClassicSalesforce() {
         WorkTypeClassicPage workType = PageTransporter.navigateToWorkTypeClassicPage();
         workType.closeAnnouncement();

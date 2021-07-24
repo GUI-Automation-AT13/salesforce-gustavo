@@ -34,6 +34,8 @@ checkstyleMain {
 
 checkstyleTest {
     source = 'src/main/java'
+    checkstyleTest.enabled = false
+
 }
 test.finalizedBy("checkstyleMain")
 check.dependsOn build

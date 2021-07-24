@@ -14,12 +14,17 @@ public class WebElementAction {
         this.wait = new WebDriverWait(driver, timeOutInSeconds);
     }
 
+    /**
+     * Waits for element visibility
+     *
+     * @param webElement is element to wait
+     */
     public void waitForElementVisibility(final WebElement webElement) {
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
     /**
-     * Sets a value in a webElemnt.
+     * Sets a value in a webElement.
      *
      * @param webElement type WebElement object
      * @param text       is string with value to set

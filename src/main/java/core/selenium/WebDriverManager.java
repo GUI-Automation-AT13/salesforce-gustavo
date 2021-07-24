@@ -1,5 +1,6 @@
 package core.selenium;
 
+import core.selenium.browser.Browser;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import salesforce.utilities.SetUp;

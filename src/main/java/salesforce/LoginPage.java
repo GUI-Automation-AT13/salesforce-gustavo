@@ -1,6 +1,5 @@
 package salesforce;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import salesforce.classic.WorkTypeClassicPage;
@@ -16,10 +15,6 @@ public class LoginPage extends BasePage {
 
     @FindBy(id = "Login")
     private WebElement loginBtn;
-
-    public LoginPage(final WebDriver driver) {
-        super(driver);
-    }
 
     @Override
     protected void waitForPageLoaded() {
@@ -58,7 +53,7 @@ public class LoginPage extends BasePage {
      */
     public WorkTypeClassicPage goToClassic() {
         driver.get(Urls.WORK_TYPE_CLASSIC.getValue());
-        return new WorkTypeClassicPage(driver);
+        return new WorkTypeClassicPage();
     }
 
     /**
@@ -68,6 +63,6 @@ public class LoginPage extends BasePage {
      */
     public WorkTypeLightningPage goToLightning() {
         driver.get(Urls.WORK_TYPE_LIGHTNING.getValue());
-        return new WorkTypeLightningPage(driver);
+        return new WorkTypeLightningPage();
     }
 }
