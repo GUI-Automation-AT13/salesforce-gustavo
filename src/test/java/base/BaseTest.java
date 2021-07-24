@@ -21,7 +21,7 @@ public class BaseTest {
     @BeforeClass(dependsOnMethods = "setUp")
     public void loginSalesforce() {
         PageTransporter.goToUrl(Urls.PATH_LOGIN.getValue());
-        loginPage = new LoginPage(webDriverManager.getDriver());
+        loginPage = new LoginPage();
         loginPage.setUserName(UserDate.USERNAME.getValue());
         loginPage.setPassword(UserDate.PASSWORD.getValue());
         loginPage.clickLoginButton();

@@ -26,7 +26,7 @@ public final class PageTransporter {
      */
     public static WorkTypeClassicPage navigateToWorkTypeClassicPage() {
         goToUrl(Urls.WORK_TYPE_CLASSIC.getValue());
-        return new WorkTypeClassicPage(WebDriverManager.getInstance().getDriver());
+        return new WorkTypeClassicPage();
     }
 
     /**
@@ -36,6 +36,6 @@ public final class PageTransporter {
      */
     public static WorkTypeLightningPage navigateToWorkTypeLightningPage() {
         goToUrl(Urls.WORK_TYPE_LIGHTNING.getValue());
-        return new WorkTypeLightningPage(WebDriverManager.getInstance().getDriver());
+        return new WorkTypeLightningPage();
     }
 }

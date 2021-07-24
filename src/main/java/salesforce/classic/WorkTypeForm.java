@@ -1,6 +1,5 @@
 package salesforce.classic;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import salesforce.BasePage;
@@ -14,10 +13,6 @@ public class WorkTypeForm extends BasePage {
 
     @FindBy(name = "save")
     protected WebElement saveBtn;
-
-    public WorkTypeForm(final WebDriver driver) {
-        super(driver);
-    }
 
     @Override
     protected void waitForPageLoaded() {
@@ -49,6 +44,6 @@ public class WorkTypeForm extends BasePage {
      */
     public WorkTypeInfo clickSaveButton() {
         saveBtn.click();
-        return new WorkTypeInfo(driver);
+        return new WorkTypeInfo();
     }
 }
