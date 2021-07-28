@@ -1,26 +1,33 @@
-package base;
+package salesforce.hooks;
 
 import api.*;
 import core.selenium.WebDriverManager;
 import core.utilities.GetEnv;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import org.testng.annotations.Test;
 import salesforce.LoginPage;
 import salesforce.PageTransporter;
+import salesforce.api.Header;
 import salesforce.entities.Token;
 import salesforce.utilities.Urls;
 import salesforce.utilities.UserDate;
-import salesforce.api.Header;
+import utilities.ObjectInformation;
 
-public class BaseTest {
+public class WorkTypeHooks {
     private WebDriverManager webDriverManager;
-    protected LoginPage loginPage;
+    protected salesforce.LoginPage loginPage;
     protected String tokenUser;
     protected String nameOwner;
     protected PageTransporter pageTransporter;
     protected final String TYPE_USER = "admin";
+    protected ObjectInformation objectInformation;
 
-    @BeforeClass
+    public WorkTypeHooks(ObjectInformation objectInformation) {
+        this.objectInformation = objectInformation;
+    }
+
+    @Before(value = "@CreateWorkType", order = 1)
     public void setUp() {
         webDriverManager = WebDriverManager.getInstance();
         webDriverManager.maximizeScreen();
@@ -28,7 +35,7 @@ public class BaseTest {
         GetEnv.getInstance().setEnvVariable(TYPE_USER);
     }
 
-    @BeforeClass(dependsOnMethods = "setUp")
+    @Before(value = "@CreateWorkType", order = 2)
     public void loginSalesforce() {
         pageTransporter.goToUrl(Urls.PATH_LOGIN.getValue());
         loginPage = new LoginPage();
@@ -37,7 +44,7 @@ public class BaseTest {
         loginPage.clickLoginButton();
     }
 
-    @BeforeClass(dependsOnMethods = "setUp")
+    @Before(value = "@CreateWorkType", order = 2)
     public void generateToken() {
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .params(UserDate.USERNAME.getKey(), UserDate.USERNAME.getValue())
@@ -53,17 +60,17 @@ public class BaseTest {
         tokenUser = apiResponse.getBody(Token.class).getAccessToken();
     }
 
-    @BeforeClass(dependsOnMethods = "generateToken")
+    @Before(value = "@CreateWorkType", order = 3)
     public void getDateUser() {
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(Urls.USER_INFO.getValue())
                 .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
                 .method(ApiMethod.GET).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
-        nameOwner = apiResponse.getResponse().jsonPath().getString("name");
+        objectInformation.setNameOwner(apiResponse.getResponse().jsonPath().getString("name"));
     }
 
-    @AfterClass
+    @After(value = "@CreateWorkType")
     public void tearDown() {
         webDriverManager.quitDriver();
     }

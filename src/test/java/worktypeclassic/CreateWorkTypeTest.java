@@ -2,7 +2,6 @@ package worktypeclassic;
 
 import base.BaseTest;
 import org.testng.annotations.Test;
-import salesforce.PageTransporter;
 import salesforce.classic.WorkTypeClassicPage;
 import salesforce.classic.WorkTypeForm;
 import salesforce.classic.WorkTypeInfo;
@@ -10,9 +9,10 @@ import salesforce.classic.WorkTypeInfo;
 import static org.testng.Assert.assertEquals;
 
 public class CreateWorkTypeTest extends BaseTest {
+
     @Test
     public void createWorkTypeToClassicSalesforce() {
-        WorkTypeClassicPage workType = PageTransporter.navigateToWorkTypeClassicPage();
+        WorkTypeClassicPage workType = pageTransporter.navigateToWorkTypeClassicPage();
         workType.closeAnnouncement();
         WorkTypeForm workTypeForm = workType.clickNewButton();
         workTypeForm.setNameTxtBox("WorkType-created-Classic");

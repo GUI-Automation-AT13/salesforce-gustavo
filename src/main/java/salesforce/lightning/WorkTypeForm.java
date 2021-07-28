@@ -23,10 +23,13 @@ public class WorkTypeForm extends BasePage {
     /**
      * Sets on text of all field of workType.
      *
-     * @param fieldName name of textBox
+     * @param fieldName  name of textBox
      * @param fieldValue is value to set on textBox
      */
     public void setInputField(final String fieldName, final String fieldValue) {
+        if (fieldValue == null) {
+            return;
+        }
         if ("Description".equals(fieldName)) {
             webElementAction.setInputField(driver.findElement(By.cssSelector(".textarea")), fieldValue);
         } else {
@@ -50,7 +53,7 @@ public class WorkTypeForm extends BasePage {
      * Sets value and select in comboBox.
      *
      * @param nameComboBox is name of comboBox
-     * @param selectValue is a value in comboBox
+     * @param selectValue  is a value in comboBox
      */
     public void setComboBoxField(final String nameComboBox, final String selectValue) {
         countComboBox++;

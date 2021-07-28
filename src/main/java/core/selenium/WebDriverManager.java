@@ -70,9 +70,18 @@ public final class WebDriverManager {
     }
 
     /**
-     * closes associated window.
+     * Closes associated window.
      */
     public void closeWindow() {
         driver.close();
+    }
+
+    /**
+     * Navigates by url.
+     *
+     * @param url is url of page
+     */
+    public void navigateToUrl(final String url) {
+        driver.navigate().to(url);
     }
 }

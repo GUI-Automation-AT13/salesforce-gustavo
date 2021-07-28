@@ -27,6 +27,7 @@ public class LoginPage extends BasePage {
      * @param userName name of user
      */
     public void setUserName(final String userName) {
+        System.out.println(userName);
         userNameTxtBox.sendKeys(userName);
     }
 

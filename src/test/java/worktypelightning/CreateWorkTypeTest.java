@@ -3,12 +3,10 @@ package worktypelightning;
 import base.BaseTest;
 import core.utilities.RandomCustom;
 import org.testng.annotations.Test;
-import salesforce.PageTransporter;
 import salesforce.lightning.WorkTypeLightningPage;
 import salesforce.lightning.WorkTypeForm;
 import salesforce.lightning.WorkTypeInfo;
 import utilities.CalendarManager;
-
 import static org.testng.Assert.assertEquals;
 
 public class CreateWorkTypeTest extends BaseTest {
@@ -17,7 +15,8 @@ public class CreateWorkTypeTest extends BaseTest {
     public void createWorkTypeLightningSalesforce() {
         CalendarManager calendarManager = new CalendarManager();
         String workTypeName = "WorkType-Lightning " + RandomCustom.random();
-        WorkTypeLightningPage workType = PageTransporter.navigateToWorkTypeLightningPage();
+        pageTransporter.navigateToPage("work Type", "Lightning");
+        WorkTypeLightningPage workType = new WorkTypeLightningPage();
         WorkTypeForm workTypeForm = workType.clickNewButton();
         workTypeForm.setInputField("Work Type Name", workTypeName);
         workTypeForm.setInputField("Description", "Descriptions-test-22");

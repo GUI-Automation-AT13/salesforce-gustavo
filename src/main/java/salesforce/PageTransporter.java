@@ -2,21 +2,19 @@ package salesforce;
 
 import core.selenium.WebDriverManager;
 import salesforce.classic.WorkTypeClassicPage;
-import salesforce.lightning.WorkTypeLightningPage;
 import salesforce.utilities.Urls;
 
-public final class PageTransporter {
+import static salesforce.utilities.Converter.converterStringToEnum;
 
-    private PageTransporter() {
-    }
+public class PageTransporter<T> {
 
     /**
      * Goes to the given Url.
      *
      * @param url - site's Url
      */
-    public static void goToUrl(final String url) {
-        WebDriverManager.getInstance().getDriver().navigate().to(url);
+    public void goToUrl(final String url) {
+        WebDriverManager.getInstance().navigateToUrl(url);
     }
 
     /**
@@ -24,18 +22,18 @@ public final class PageTransporter {
      *
      * @return WorkTypeClassicPage object
      */
-    public static WorkTypeClassicPage navigateToWorkTypeClassicPage() {
+    public WorkTypeClassicPage navigateToWorkTypeClassicPage() {
         goToUrl(Urls.WORK_TYPE_CLASSIC.getValue());
         return new WorkTypeClassicPage();
     }
 
     /**
-     * Sets WorkTypeClassicPage object with instance interact.
+     * Navigates by url.
      *
-     * @return WorkTypeClassicPage object
+     * @param namePage is string with name page
+     * @param mode is classic or Lightning to salesforce
      */
-    public static WorkTypeLightningPage navigateToWorkTypeLightningPage() {
-        goToUrl(Urls.WORK_TYPE_LIGHTNING.getValue());
-        return new WorkTypeLightningPage();
+    public void navigateToPage(final String namePage, final String mode) {
+        goToUrl(converterStringToEnum(namePage, mode).getValue());
     }
 }
