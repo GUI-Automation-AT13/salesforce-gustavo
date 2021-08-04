@@ -144,7 +144,7 @@ public class WorkTypeForm extends BasePage {
         mapActions.put("Timeframe Start", () -> setInputField("Timeframe Start",
                 workTypeMap.get("Timeframe Start")));
         mapActions.put("Time Frame Start Unit", () -> setComboBoxField("Time Frame Start Unit",
-                workTypeMap.get("Description")));
+                workTypeMap.get("Time Frame Start Unit")));
         mapActions.put("Timeframe End", () -> setInputField("Timeframe End", workTypeMap.get("Timeframe End")));
         mapActions.put("Time Frame End Unit", () -> setComboBoxField("Time Frame End Unit",
                 workTypeMap.get("Time Frame End Unit")));

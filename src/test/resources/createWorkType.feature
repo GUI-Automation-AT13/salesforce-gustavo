@@ -17,11 +17,16 @@ Feature: Create workType
     When I create a new workType with all fields
       | Work Type Name                | workType                 |
       | Estimated Duration            | 25.00                    |
+      | Duration Type                 | Minutes                  |
       | Description                   | WorkTypeDescription      |
       | Operating Hours               | OperatingHours-test news |
+      | Block Time Before Unit        | Minute(s)                |
       | Block Time Before Appointment | 3                        |
+      | Block Time After Unit         | Minute(s)                |
       | Block Time After Appointment  | 15                       |
       | Timeframe Start               | 4                        |
+      | Time Frame Start Unit         | Day(s)                   |
       | Timeframe End                 | 4                        |
+      | Time Frame End Unit           | Day(s)                   |
     Then I verify WorkType created with requirement fields
     And I matches date and creator's name
