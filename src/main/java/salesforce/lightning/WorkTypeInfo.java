@@ -1,9 +1,15 @@
 package salesforce.lightning;
 
+import core.utilities.supplier.StringSupplier;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import salesforce.BasePage;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class WorkTypeInfo extends BasePage {
     @FindBy(xpath = "//*[@class='uiOutputText']")
@@ -66,4 +72,31 @@ public class WorkTypeInfo extends BasePage {
         return webElementAction.getText(nameCreatorTxt);
     }
 
+    public String getCurrentUrl() {
+        return webElementAction.getCurrentUrl();
+    }
+
+    public List<String> getValueField(final Map<String, String> table) {
+        List<String> result = new ArrayList<>();
+        HashMap<String, StringSupplier> actionsWorkTypeMap = getTxtFields();
+        table.keySet().forEach(key -> result.add(actionsWorkTypeMap.get(key).getAsString()));
+        return result;
+    }
+
+    /**
+     * Gets text fields of workType.
+     *
+     * @return a map with methods of CreatedWorkType
+     */
+    private HashMap<String, StringSupplier> getTxtFields() {
+        HashMap<String, StringSupplier> mapValues = new HashMap<>();
+        mapValues.put("Work Type Name", this::getNameOfWorkType);
+        mapValues.put("Description", this::getDescription);
+        mapValues.put("Estimated Duration", () -> getTxtField("Estimated Duration"));
+        mapValues.put("Block Time Before Appointment", () -> getTxtField("Block Time Before Appointment"));
+        mapValues.put("Block Time After Appointment", () -> getTxtField("Block Time After Appointment"));
+        mapValues.put("Timeframe Start", () -> getTxtField("Timeframe Start"));
+        mapValues.put("Timeframe End", () -> getTxtField("Timeframe End"));
+        return mapValues;
+    }
 }

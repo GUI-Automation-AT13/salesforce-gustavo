@@ -5,8 +5,7 @@ import core.selenium.WebDriverManager;
 import core.utilities.GetEnv;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import org.testng.annotations.Test;
-import salesforce.LoginPage;
+import org.apache.log4j.Logger;
 import salesforce.PageTransporter;
 import salesforce.api.Header;
 import salesforce.entities.Token;
@@ -15,37 +14,30 @@ import salesforce.utilities.UserDate;
 import utilities.ObjectInformation;
 
 public class WorkTypeHooks {
+    private Logger log = Logger.getLogger(getClass());
     private WebDriverManager webDriverManager;
-    protected salesforce.LoginPage loginPage;
-    protected String tokenUser;
-    protected String nameOwner;
-    protected PageTransporter pageTransporter;
-    protected final String TYPE_USER = "admin";
-    protected ObjectInformation objectInformation;
+    private String tokenUser;
+    private PageTransporter pageTransporter;
+    private ObjectInformation objectInformation = new ObjectInformation();
+    private final String USER_TYPE = "admin";
 
     public WorkTypeHooks(ObjectInformation objectInformation) {
+        log.info("WorkTypeHooks constructor");
         this.objectInformation = objectInformation;
     }
 
     @Before(value = "@CreateWorkType", order = 1)
     public void setUp() {
+        log.info("Set browser and initialize webDriverManager");
         webDriverManager = WebDriverManager.getInstance();
         webDriverManager.maximizeScreen();
         pageTransporter = new PageTransporter();
-        GetEnv.getInstance().setEnvVariable(TYPE_USER);
-    }
-
-    @Before(value = "@CreateWorkType", order = 2)
-    public void loginSalesforce() {
-        pageTransporter.goToUrl(Urls.PATH_LOGIN.getValue());
-        loginPage = new LoginPage();
-        loginPage.setUserName(UserDate.USERNAME.getValue());
-        loginPage.setPassword(UserDate.PASSWORD.getValue());
-        loginPage.clickLoginButton();
+        GetEnv.getInstance().setEnvVariable(USER_TYPE);
     }
 
     @Before(value = "@CreateWorkType", order = 2)
     public void generateToken() {
+        log.info("Generate Token");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .params(UserDate.USERNAME.getKey(), UserDate.USERNAME.getValue())
                 .params(UserDate.PASSWORD.getKey(), UserDate.PASSWORD.getValue())
@@ -62,6 +54,7 @@ public class WorkTypeHooks {
 
     @Before(value = "@CreateWorkType", order = 3)
     public void getDateUser() {
+        log.info("Get Date user");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(Urls.USER_INFO.getValue())
                 .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
@@ -70,8 +63,19 @@ public class WorkTypeHooks {
         objectInformation.setNameOwner(apiResponse.getResponse().jsonPath().getString("name"));
     }
 
-    @After(value = "@CreateWorkType")
+    @After(value = "@CreateWorkType", order = 2)
+    public void cleanRepository() {
+        log.info("Delete WorkType");
+        ApiRequest apiRequest = new ApiRequestBuilder()
+                .baseUri(Urls.WORK_TYPE.getValue() + objectInformation.getId())
+                .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
+                .method(ApiMethod.DELETE).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @After(value = "@CreateWorkType", order = 1)
     public void tearDown() {
+        log.info("Close Driver");
         webDriverManager.quitDriver();
     }
 }

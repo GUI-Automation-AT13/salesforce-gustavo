@@ -13,7 +13,7 @@ public class PageTransporter<T> {
      *
      * @param url - site's Url
      */
-    public void goToUrl(final String url) {
+    public static void goToUrl(final String url) {
         WebDriverManager.getInstance().navigateToUrl(url);
     }
 

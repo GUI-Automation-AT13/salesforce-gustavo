@@ -25,10 +25,11 @@ public class CreateWorkTypeTest extends BaseTest {
         workTypeForm.setInputField("Block Time Before Appointment", "52");
         workTypeForm.setComboBoxField("Block Time Before Unit", "Minute(s)");
         workTypeForm.setInputField("Block Time After Appointment", "5");
-        workTypeForm.setComboBoxField("Block Time After Unit", "Hour(s)");
+        workTypeForm.setComboBoxField("Block Time After Unit", "Minute(s)");
         workTypeForm.setInputField("Timeframe Start", "4");
         workTypeForm.setComboBoxField("Time Frame Start Unit", "Day(s)");
         workTypeForm.setInputField("Timeframe End", "5");
+        workTypeForm.setComboBoxField("Time Frame End Unit", "Day(s)");
         WorkTypeInfo workTypeInfo = workTypeForm.clickSaveButton();
         assertEquals(workTypeInfo.getNameOfWorkType(), workTypeName);
         assertEquals(workTypeInfo.getDescription(), "Descriptions-test-22");

@@ -7,8 +7,8 @@ public enum Urls {
     WORK_TYPE_CLASSIC(UserDate.URL_PERSONAL.getValue() + "08q/o"),
     TOKEN("https://login.salesforce.com/services/oauth2/token"),
     USER_INFO(UserDate.URL_PERSONAL.getValue() + "services/oauth2/userinfo"),
-    WORK_TYPE(UserDate.URL_PERSONAL.getValue() + "/services/data/v52.0/sobjects/WorkType"),
-    OPERATING_HOURS(UserDate.URL_PERSONAL.getValue() + "/services/data/v52.0/sobjects/OperatingHours");
+    WORK_TYPE(UserDate.URL_PERSONAL.getValue() + "services/data/v52.0/sobjects/WorkType/"),
+    OPERATING_HOURS(UserDate.URL_PERSONAL.getValue() + "services/data/v52.0/sobjects/OperatingHours");
 
 
     private String value;

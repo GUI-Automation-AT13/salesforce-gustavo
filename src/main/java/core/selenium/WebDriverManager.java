@@ -84,4 +84,8 @@ public final class WebDriverManager {
     public void navigateToUrl(final String url) {
         driver.navigate().to(url);
     }
+
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
+    }
 }

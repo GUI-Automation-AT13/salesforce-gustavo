@@ -15,6 +15,25 @@ public class ObjectInformation {
     private String token;
     private String id;
     private String nameOwner;
+    private String typeUser;
+
+    /**
+     * Gets typeUser.
+     *
+     * @return a typeUser
+     */
+    public String getTypeUser() {
+        return typeUser;
+    }
+
+    /**
+     * Sets typeUser.
+     *
+     * @param typeUser of user
+     */
+    public void setTypeUser(final String typeUser) {
+        this.typeUser = typeUser;
+    }
 
     /**
      * Gets token.
