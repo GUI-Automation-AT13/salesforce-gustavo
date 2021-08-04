@@ -1,6 +1,8 @@
 package salesforce.hooks;
 
 import api.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import core.selenium.WebDriverManager;
 import core.utilities.GetEnv;
 import io.cucumber.java.After;
@@ -9,6 +11,8 @@ import org.apache.log4j.Logger;
 import salesforce.PageTransporter;
 import salesforce.api.Header;
 import salesforce.entities.Token;
+import salesforce.entities.operatinghours.OperatingHours;
+import salesforce.entities.operatinghours.OperatingHoursCreated;
 import salesforce.utilities.Urls;
 import salesforce.utilities.UserDate;
 import utilities.ObjectInformation;
@@ -20,6 +24,7 @@ public class WorkTypeHooks {
     private PageTransporter pageTransporter;
     private ObjectInformation objectInformation = new ObjectInformation();
     private final String USER_TYPE = "admin";
+    private String idOperatingHours;
 
     public WorkTypeHooks(ObjectInformation objectInformation) {
         log.info("WorkTypeHooks constructor");
@@ -61,6 +66,30 @@ public class WorkTypeHooks {
                 .method(ApiMethod.GET).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         objectInformation.setNameOwner(apiResponse.getResponse().jsonPath().getString("name"));
+    }
+
+    @Before(value = "@CreateWorkType", order = 3)
+    public void createOperatingHours() throws JsonProcessingException {
+        log.info("Create OperatingHours");
+        OperatingHours operatingHours = new OperatingHours();
+        operatingHours.setName("OperatingHours-test news");
+        ApiRequest apiRequest = new ApiRequestBuilder()
+                .baseUri(Urls.OPERATING_HOURS.getValue())
+                .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
+                .body(new ObjectMapper().writeValueAsString(operatingHours))
+                .method(ApiMethod.POST).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
+        idOperatingHours = apiResponse.getBody(OperatingHoursCreated.class).getId();
+    }
+
+    @After(value = "@CreateWorkType", order = 2)
+    public void deleteOperatingHours() {
+        log.info("Delete OperatingHours");
+        ApiRequest apiRequest = new ApiRequestBuilder()
+                .baseUri(Urls.OPERATING_HOURS.getValue() + idOperatingHours)
+                .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
+                .method(ApiMethod.DELETE).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }
 
     @After(value = "@CreateWorkType", order = 2)

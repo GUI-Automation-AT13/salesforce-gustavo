@@ -41,7 +41,7 @@ public class WebElementAction {
      * Sets a value in a webElement.
      *
      * @param selector type selector object
-     * @param text is string with value to set
+     * @param text     is string with value to set
      */
     public void setInputField(final By selector, final String text) {
         WebDriverManager.getInstance().getDriver().findElement(selector).sendKeys(text);
@@ -73,6 +73,7 @@ public class WebElementAction {
      * @param field web element to get text.
      */
     public void clickByXpath(final String field) {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(field)));
         WebDriverManager.getInstance().getDriver().findElement(By.xpath(field)).click();
     }
 
@@ -87,6 +88,11 @@ public class WebElementAction {
         action.perform();
     }
 
+    /**
+     * Gets current url.
+     *
+     * @return a String with current url.
+     */
     public String getCurrentUrl() {
         return WebDriverManager.getInstance().getDriver().getCurrentUrl();
     }

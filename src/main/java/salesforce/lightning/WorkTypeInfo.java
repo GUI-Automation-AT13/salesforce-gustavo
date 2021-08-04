@@ -38,6 +38,11 @@ public class WorkTypeInfo extends BasePage {
         return nameWorkTypeTxt.getText();
     }
 
+    /**
+     * Gets the description of work type.
+     *
+     * @return description of work type
+     */
     public String getDescription() {
         return descriptionTxt.getText();
     }
@@ -52,6 +57,15 @@ public class WorkTypeInfo extends BasePage {
     public String getTxtField(final String nameTxtBox) {
         String xpath = String.format("//*[contains(text(),'%s')]/../..//*[@class='uiOutputNumber']", nameTxtBox);
         return webElementAction.getText(driver.findElement(By.xpath(xpath)));
+    }
+    /**
+     * Gets values of Operating Hours txt box.
+     *
+     * @return value of TxtBox
+     */
+    public String getOperatingHoursTxtBox() {
+        return webElementAction.getText(driver.findElement(
+                By.xpath("//*[contains(text(),'Operating Hours')]/../..//a[@target='_blank'][@href]")));
     }
 
     /**
@@ -72,10 +86,21 @@ public class WorkTypeInfo extends BasePage {
         return webElementAction.getText(nameCreatorTxt);
     }
 
+    /**
+     * Gets current url of page.
+     *
+     * @return a String with url current
+     */
     public String getCurrentUrl() {
         return webElementAction.getCurrentUrl();
     }
 
+    /**
+     * Gets information of workType created.
+     *
+     * @param table is values to get of txtBoxs
+     * @return a List with values of txtBoxs
+     */
     public List<String> getValueField(final Map<String, String> table) {
         List<String> result = new ArrayList<>();
         HashMap<String, StringSupplier> actionsWorkTypeMap = getTxtFields();
@@ -92,6 +117,7 @@ public class WorkTypeInfo extends BasePage {
         HashMap<String, StringSupplier> mapValues = new HashMap<>();
         mapValues.put("Work Type Name", this::getNameOfWorkType);
         mapValues.put("Description", this::getDescription);
+        mapValues.put("Operating Hours", this::getOperatingHoursTxtBox);
         mapValues.put("Estimated Duration", () -> getTxtField("Estimated Duration"));
         mapValues.put("Block Time Before Appointment", () -> getTxtField("Block Time Before Appointment"));
         mapValues.put("Block Time After Appointment", () -> getTxtField("Block Time After Appointment"));

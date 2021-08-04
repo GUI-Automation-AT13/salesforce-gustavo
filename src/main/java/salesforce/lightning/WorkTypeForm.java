@@ -20,6 +20,9 @@ public class WorkTypeForm extends BasePage {
     @FindBy(css = ".textarea")
     protected WebElement descriptionTxtBox;
 
+    @FindBy(className = "primaryLabel slds-truncate slds-lookup__result-text")
+    protected WebElement d;
+
     private String selectFieldTxtBox = "//*[contains(text(),'%s')]/../..//*[@type='text']";
     private String valueEstimatedDurationComboBox = "//a[normalize-space()='%s']";
     private String xpathComboBoxSomeFields = "//*[contains(text(),'%s')]/../..//a[@class='select']";
@@ -29,6 +32,13 @@ public class WorkTypeForm extends BasePage {
     @Override
     protected void waitForPageLoaded() {
         webElementAction.waitForElementVisibility(estimatedDurationComboBox);
+    }
+
+    public void clickOperatingHours(final String operatingHours) {
+        webElementAction.clickByXpath(String.format(selectFieldTxtBox, "Operating Hours"));
+        String operatingHoursSelected =
+                "//*[contains(text(),'%s')]/../..//*[@class='primaryLabel slds-truncate slds-lookup__result-text']";
+        webElementAction.clickByXpath(String.format(operatingHoursSelected, operatingHours));
     }
 
     /**
@@ -99,6 +109,11 @@ public class WorkTypeForm extends BasePage {
         return new WorkTypeInfo();
     }
 
+    /**
+     * Fills up form to create a workType.
+     *
+     * @param table is values to fill up txtBoxs
+     */
     public void fillUpField(final Map<String, String> table) {
         HashMap<String, VoidSupplier> actionsWorkTypeMap = mapActionsWorkType(table);
         table.keySet().forEach(key -> actionsWorkTypeMap.get(key).run());
@@ -114,6 +129,7 @@ public class WorkTypeForm extends BasePage {
         HashMap<String, VoidSupplier> mapActions = new HashMap<>();
         mapActions.put("Work Type Name", () -> setInputField("Work Type Name", workTypeMap.get("Work Type Name")));
         mapActions.put("Description", () -> setDescription(workTypeMap.get("Description")));
+        mapActions.put("Operating Hours", () -> clickOperatingHours(workTypeMap.get("Operating Hours"))); //****
         mapActions.put("Estimated Duration", () -> setInputField("Estimated Duration",
                 workTypeMap.get("Estimated Duration")));
         mapActions.put("Duration Type", () -> setDurationTypeComboBox(workTypeMap.get("Duration Type")));
@@ -134,4 +150,6 @@ public class WorkTypeForm extends BasePage {
                 workTypeMap.get("Time Frame End Unit")));
         return mapActions;
     }
+
+
 }
