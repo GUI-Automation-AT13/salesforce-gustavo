@@ -4,17 +4,17 @@ Feature: Create workType
   Scenario: create an workType with only required fields
     Given I login to Salesforce site as an admin user
     When I navigate to "work Type" page in mode "Lightning"
-    When I create a new workType only with required fields
+      And I create a new workType only with required fields
       | Work Type Name     | workType |
       | Estimated Duration | 2.00     |
     Then I verify WorkType created with requirement fields
-    And I matches date and creator's name
+      And I matches date and creator's name
 
   @CreateWorkType
   Scenario: create an workType
     Given I login to Salesforce site as an admin user
     When I navigate to "work Type" page in mode "Lightning"
-    When I create a new workType with all fields
+      And I create a new workType with all fields
       | Work Type Name                | workType                 |
       | Estimated Duration            | 25.00                    |
       | Duration Type                 | Minutes                  |
@@ -29,4 +29,4 @@ Feature: Create workType
       | Timeframe End                 | 4                        |
       | Time Frame End Unit           | Day(s)                   |
     Then I verify WorkType created with requirement fields
-    And I matches date and creator's name
+      And I matches date and creator's name

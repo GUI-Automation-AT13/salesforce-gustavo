@@ -49,7 +49,7 @@ public class CreateWorkTypeSteps {
         loginPage.clickLoginButton();
     }
 
-    @When("^I create a new workType (?:.*)$")
+    @And("^I create a new workType (?:.*)$")
     public void iCreateANewWorkTypeOnlyWithRequiredAllFields(final Map<String, String> table) {
         log.info("Create a workType");
         tableFeature = table;
