@@ -1,5 +1,6 @@
 package salesforce.lightning;
 
+import core.utilities.strategy.FeatureForm;
 import core.utilities.supplier.VoidSupplier;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -9,7 +10,7 @@ import salesforce.BasePage;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WorkTypeForm extends BasePage {
+public class WorkTypeForm extends BasePage implements FeatureForm {
 
     @FindBy(css = ".select[aria-required='true']")
     protected WebElement estimatedDurationComboBox;
@@ -104,9 +105,9 @@ public class WorkTypeForm extends BasePage {
      *
      * @return WorkTypeInfo which is to pass other page.
      */
-    public WorkTypeInfo clickSaveButton() {
+    public WorkTypeCreated clickSaveButton() {
         webElementAction.clickElement(saveBtn);
-        return new WorkTypeInfo();
+        return new WorkTypeCreated();
     }
 
     /**
@@ -150,6 +151,4 @@ public class WorkTypeForm extends BasePage {
                 workTypeMap.get("Time Frame End Unit")));
         return mapActions;
     }
-
-
 }

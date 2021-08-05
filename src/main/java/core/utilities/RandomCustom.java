@@ -1,6 +1,7 @@
 package core.utilities;
 
-import utilities.CalendarManager;
+import core.utilities.date.CalendarManager;
+
 import java.util.UUID;
 
 public final class RandomCustom {

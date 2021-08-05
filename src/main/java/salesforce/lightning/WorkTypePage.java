@@ -1,10 +1,11 @@
 package salesforce.lightning;
 
+import core.utilities.strategy.FeaturesPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import salesforce.BasePage;
 
-public class WorkTypeLightningPage extends BasePage {
+public class WorkTypePage extends BasePage implements FeaturesPage {
     @FindBy(xpath = "//a[@class='forceActionLink'][@role='button']")
     protected WebElement newBtn;
 

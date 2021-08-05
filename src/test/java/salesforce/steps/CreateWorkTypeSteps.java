@@ -1,37 +1,40 @@
 package salesforce.steps;
 
 import core.utilities.GetEnv;
+import core.utilities.strategy.FeatureCreated;
+import core.utilities.strategy.FeatureForm;
+import core.utilities.strategy.FeaturesPage;
+import core.utilities.strategy.MapPages;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 import salesforce.LoginPage;
-import salesforce.lightning.WorkTypeForm;
-import salesforce.lightning.WorkTypeInfo;
-import salesforce.lightning.WorkTypeLightningPage;
 import salesforce.utilities.Urls;
 import salesforce.utilities.UserDate;
-import utilities.CalendarManager;
+import core.utilities.date.CalendarManager;
 import org.testng.asserts.SoftAssert;
-import utilities.ObjectInformation;
+import salesforce.utilities.ObjectInformation;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 import static salesforce.PageTransporter.goToUrl;
-import static utilities.IdPage.getIdWorKType;
+import static salesforce.utilities.IdPage.getIdWorKType;
 
 public class CreateWorkTypeSteps {
     private Logger log = Logger.getLogger(getClass());
     private CalendarManager calendarManager = new CalendarManager();
-    private WorkTypeInfo workTypeInfo;
     private SoftAssert softAssert = new SoftAssert();
     private ObjectInformation objectInformation;
     private Map<String, String> tableFeature;
-    private WorkTypeLightningPage workTypeLightningPage;
-    private WorkTypeForm workTypeForm;
+    private MapPages mapPages = new MapPages();
+    private FeaturesPage featurePage;
+    private FeatureForm featureForm;
+    private FeatureCreated featureCreated;
 
     public CreateWorkTypeSteps(ObjectInformation objectInformation) {
         log.info("CreateWorkTypeSteps constructor");
@@ -49,21 +52,22 @@ public class CreateWorkTypeSteps {
         loginPage.clickLoginButton();
     }
 
-    @And("^I create a new workType (?:.*)$")
-    public void iCreateANewWorkTypeOnlyWithRequiredAllFields(final Map<String, String> table) {
+    @When("^I create a new (.*) with (?:.*)$")
+    public void iCreateANewWorkTypeOnlyWithRequiredFields(String nameFeature, final Map<String, String> table) {
         log.info("Create a workType");
         tableFeature = table;
-        workTypeLightningPage = new WorkTypeLightningPage();
-        workTypeForm = workTypeLightningPage.clickNewButton();
-        workTypeForm.fillUpField(table);
-        workTypeInfo = workTypeForm.clickSaveButton();
-        objectInformation.setId(getIdWorKType(workTypeInfo.getCurrentUrl()));
+        tableFeature = table;
+        featurePage = mapPages.featuresPage(nameFeature);
+        featureForm = featurePage.clickNewButton();
+        featureForm.fillUpField(table);
+        featureCreated = featureForm.clickSaveButton();
+        objectInformation.setId(getIdWorKType(featureCreated.getCurrentUrl()));
     }
 
     @Then("^I verify WorkType created with (?:.*)$")
     public void iVerifyWorkTypeCreatedWithAllFields() {
         log.info("Assert of fields");
-        List<String> valuesField = workTypeInfo.getValueField(tableFeature);
+        List<String> valuesField = featureCreated.getValueField(tableFeature);
         assertEquals(valuesField, new ArrayList<>(tableFeature.values()));
     }
 
@@ -71,7 +75,7 @@ public class CreateWorkTypeSteps {
     @And("I matches date and creator's name")
     public void iMatchesRequirementAllFields() {
         log.info("Assert of date and creator's name");
-        assertEquals(workTypeInfo.getCreatedByTxt(), calendarManager.generateDateActual("M/d/yyyy, h:mm a"));
-        assertEquals(workTypeInfo.getNameCreatorTxt(), objectInformation.getNameOwner());
+        assertEquals(featureCreated.getCreatedByTxt(), calendarManager.generateDateActual("M/d/yyyy, h:mm a"));
+        assertEquals(featureCreated.getNameCreatorTxt(), objectInformation.getNameOwner());
     }
 }

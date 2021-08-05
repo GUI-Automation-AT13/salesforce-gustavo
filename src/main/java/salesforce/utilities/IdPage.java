@@ -1,4 +1,4 @@
-package utilities;
+package salesforce.utilities;
 
 public final class IdPage {
 

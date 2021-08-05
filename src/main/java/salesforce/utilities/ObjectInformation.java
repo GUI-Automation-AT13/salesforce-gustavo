@@ -9,7 +9,7 @@
  * @author Gustavo Zacarias Huanca Alconz
  */
 
-package utilities;
+package salesforce.utilities;
 
 public class ObjectInformation {
     private String token;

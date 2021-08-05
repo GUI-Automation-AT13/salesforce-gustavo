@@ -15,7 +15,7 @@ import salesforce.entities.operatinghours.OperatingHours;
 import salesforce.entities.operatinghours.OperatingHoursCreated;
 import salesforce.utilities.Urls;
 import salesforce.utilities.UserDate;
-import utilities.ObjectInformation;
+import salesforce.utilities.ObjectInformation;
 
 public class WorkTypeHooks {
     private Logger log = Logger.getLogger(getClass());

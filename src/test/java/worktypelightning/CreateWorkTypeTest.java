@@ -3,10 +3,10 @@ package worktypelightning;
 import base.BaseTest;
 import core.utilities.RandomCustom;
 import org.testng.annotations.Test;
-import salesforce.lightning.WorkTypeLightningPage;
+import salesforce.lightning.WorkTypePage;
 import salesforce.lightning.WorkTypeForm;
-import salesforce.lightning.WorkTypeInfo;
-import utilities.CalendarManager;
+import salesforce.lightning.WorkTypeCreated;
+import core.utilities.date.CalendarManager;
 import static org.testng.Assert.assertEquals;
 
 public class CreateWorkTypeTest extends BaseTest {
@@ -16,7 +16,7 @@ public class CreateWorkTypeTest extends BaseTest {
         CalendarManager calendarManager = new CalendarManager();
         String workTypeName = "WorkType-Lightning " + RandomCustom.random();
         pageTransporter.navigateToPage("work Type", "Lightning");
-        WorkTypeLightningPage workType = new WorkTypeLightningPage();
+        WorkTypePage workType = new WorkTypePage();
         WorkTypeForm workTypeForm = workType.clickNewButton();
         workTypeForm.setInputField("Work Type Name", workTypeName);
         workTypeForm.setInputField("Description", "Descriptions-test-22");
@@ -30,7 +30,7 @@ public class CreateWorkTypeTest extends BaseTest {
         workTypeForm.setComboBoxField("Time Frame Start Unit", "Day(s)");
         workTypeForm.setInputField("Timeframe End", "5");
         workTypeForm.setComboBoxField("Time Frame End Unit", "Day(s)");
-        WorkTypeInfo workTypeInfo = workTypeForm.clickSaveButton();
+        WorkTypeCreated workTypeInfo = workTypeForm.clickSaveButton();
         assertEquals(workTypeInfo.getNameOfWorkType(), workTypeName);
         assertEquals(workTypeInfo.getDescription(), "Descriptions-test-22");
         assertEquals(workTypeInfo.getTxtField("Estimated Duration"), "68,00");

@@ -1,5 +1,6 @@
 package salesforce.lightning;
 
+import core.utilities.strategy.FeatureCreated;
 import core.utilities.supplier.StringSupplier;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WorkTypeInfo extends BasePage {
+public class WorkTypeCreated extends BasePage implements FeatureCreated {
     @FindBy(xpath = "//*[@class='uiOutputText']")
     protected WebElement nameWorkTypeTxt;
 
