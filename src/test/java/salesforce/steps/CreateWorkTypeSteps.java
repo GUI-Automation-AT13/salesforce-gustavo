@@ -11,6 +11,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 import salesforce.LoginPage;
+import salesforce.utilities.GeneratorUniqueString;
 import salesforce.utilities.Urls;
 import salesforce.utilities.UserDate;
 import core.utilities.date.CalendarManager;
@@ -55,11 +56,10 @@ public class CreateWorkTypeSteps {
     @When("^I create a new (.*) with (?:.*)$")
     public void iCreateANewWorkTypeOnlyWithRequiredFields(String nameFeature, final Map<String, String> table) {
         log.info("Create a workType");
-        tableFeature = table;
-        tableFeature = table;
+        tableFeature = GeneratorUniqueString.nameUnique(table);
         featurePage = mapPages.featuresPage(nameFeature);
         featureForm = featurePage.clickNewButton();
-        featureForm.fillUpField(table);
+        featureForm.fillUpField(tableFeature);
         featureCreated = featureForm.clickSaveButton();
         objectInformation.setId(getIdWorKType(featureCreated.getCurrentUrl()));
     }
