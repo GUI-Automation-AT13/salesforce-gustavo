@@ -22,9 +22,15 @@ public final class WebDriverManager {
     public static WebDriverManager getInstance() {
         if (instance == null) {
             instance = new WebDriverManager();
-            driver = browser.setBrowser(SetUp.BROWSER.getValue());
         }
         return instance;
+    }
+
+    /**
+     * Sets Browser.
+     */
+    public void setBrowser() {
+        driver = browser.setBrowser(SetUp.BROWSER.getValue());
     }
 
     /**

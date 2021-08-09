@@ -35,6 +35,7 @@ public class WorkTypeHooks {
     public void setUp() {
         log.info("Set browser and initialize webDriverManager");
         webDriverManager = WebDriverManager.getInstance();
+        webDriverManager.setBrowser();
         webDriverManager.maximizeScreen();
         pageTransporter = new PageTransporter();
         GetEnv.getInstance().setEnvVariable(USER_TYPE);

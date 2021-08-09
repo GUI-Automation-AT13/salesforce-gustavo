@@ -78,6 +78,17 @@ public class WebElementAction {
     }
 
     /**
+     * Gets the text of a web element.
+     *
+     * @param field web element to get text.
+     * @return web element's text
+     */
+    public String getTextOfElementByField(final String field) {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(field)));
+        return  WebDriverManager.getInstance().getDriver().findElement(By.xpath(field)).getText();
+    }
+
+    /**
      * Selects a comboBox by webElement.
      *
      * @param webElement type WebElement object.

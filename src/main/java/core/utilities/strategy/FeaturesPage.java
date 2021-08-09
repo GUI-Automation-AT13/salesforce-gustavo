@@ -8,9 +8,13 @@
 
 package core.utilities.strategy;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Implements in feature page.
  */
 public interface FeaturesPage {
     FeatureForm clickNewButton();
+    List<String> getValueTables(Map<String, String> table);
 }

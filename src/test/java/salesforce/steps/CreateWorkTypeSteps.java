@@ -10,6 +10,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
+import org.testng.Assert;
 import salesforce.LoginPage;
 import salesforce.utilities.GeneratorUniqueString;
 import salesforce.utilities.Urls;
@@ -77,5 +78,11 @@ public class CreateWorkTypeSteps {
         log.info("Assert of date and creator's name");
         assertEquals(featureCreated.getCreatedByTxt(), calendarManager.generateDateActual("M/d/yyyy, h:mm a"));
         assertEquals(featureCreated.getNameCreatorTxt(), objectInformation.getNameOwner());
+    }
+
+    @Then("^I verify (.*) created in table$")
+    public void iVerifyWorkTypeCreatedInTable(String nameFeature) {
+        List<String> valuesField = featurePage.getValueTables(tableFeature);
+        Assert.assertEquals(valuesField, new ArrayList<String>(tableFeature.values()));
     }
 }

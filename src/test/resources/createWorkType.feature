@@ -30,3 +30,14 @@ Feature: Create workType
       | Time Frame End Unit           | Day(s)                   |
     Then I verify WorkType created with requirement fields
       And I matches date and creator's name
+
+  @CreateWorkType
+  Scenario: create an workType with only required fields
+    Given I login to Salesforce site as an admin user
+    When I navigate to "work Type" page in mode "Lightning"
+    And I create a new workType with required fields
+      | Work Type Name     | workType |
+      | Estimated Duration | 2.00     |
+      | Duration Type      | Hours    |
+    When I navigate to "work Type page" page in mode "Lightning"
+    Then I verify WorkType created in table
