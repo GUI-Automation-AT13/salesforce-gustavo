@@ -27,7 +27,7 @@ import static org.testng.Assert.assertEquals;
 import static salesforce.PageTransporter.goToUrl;
 import static salesforce.utilities.IdPage.getIdWorKType;
 
-public class CreateWorkTypeSteps {
+public class GeneralSteps {
     private Logger log = Logger.getLogger(getClass());
     private CalendarManager calendarManager = new CalendarManager();
     private SoftAssert softAssert = new SoftAssert();
@@ -38,7 +38,7 @@ public class CreateWorkTypeSteps {
     private FeatureForm featureForm;
     private FeatureCreated featureCreated;
 
-    public CreateWorkTypeSteps(ObjectInformation objectInformation) {
+    public GeneralSteps(ObjectInformation objectInformation) {
         log.info("CreateWorkTypeSteps constructor");
         this.objectInformation = objectInformation;
     }
