@@ -1,8 +1,8 @@
 package base;
 
 import api.*;
-
 import core.selenium.WebDriverManager;
+import core.utilities.GetEnv;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import salesforce.LoginPage;
@@ -17,23 +17,27 @@ public class BaseTest {
     protected LoginPage loginPage;
     protected String tokenUser;
     protected String nameOwner;
+    protected PageTransporter pageTransporter;
+    protected final String TYPE_USER = "admin";
 
     @BeforeClass
     public void setUp() {
         webDriverManager = WebDriverManager.getInstance();
         webDriverManager.maximizeScreen();
+        pageTransporter = new PageTransporter();
+        GetEnv.getInstance().setEnvVariable(TYPE_USER);
     }
 
     @BeforeClass(dependsOnMethods = "setUp")
     public void loginSalesforce() {
-        PageTransporter.goToUrl(Urls.PATH_LOGIN.getValue());
+        pageTransporter.goToUrl(Urls.PATH_LOGIN.getValue());
         loginPage = new LoginPage();
         loginPage.setUserName(UserDate.USERNAME.getValue());
         loginPage.setPassword(UserDate.PASSWORD.getValue());
         loginPage.clickLoginButton();
     }
 
-    @BeforeClass
+    @BeforeClass(dependsOnMethods = "setUp")
     public void generateToken() {
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .params(UserDate.USERNAME.getKey(), UserDate.USERNAME.getValue())

@@ -22,9 +22,15 @@ public final class WebDriverManager {
     public static WebDriverManager getInstance() {
         if (instance == null) {
             instance = new WebDriverManager();
-            driver = browser.setBrowser(SetUp.BROWSER.getValue());
         }
         return instance;
+    }
+
+    /**
+     * Sets Browser.
+     */
+    public void setBrowser() {
+        driver = browser.setBrowser(SetUp.BROWSER.getValue());
     }
 
     /**
@@ -70,9 +76,22 @@ public final class WebDriverManager {
     }
 
     /**
-     * closes associated window.
+     * Closes associated window.
      */
     public void closeWindow() {
         driver.close();
+    }
+
+    /**
+     * Navigates by url.
+     *
+     * @param url is url of page
+     */
+    public void navigateToUrl(final String url) {
+        driver.navigate().to(url);
+    }
+
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
     }
 }

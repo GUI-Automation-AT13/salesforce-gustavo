@@ -1,10 +1,11 @@
 package salesforce.utilities;
 
-import static core.utilities.GetEnv.envVariable;
+import core.utilities.GetEnv;
 
 public enum SetUp {
-    WAIT_TYPE(envVariable().get("WAIT_TYPE")),
-    BROWSER(envVariable().get("BROWSER"));
+    WAIT_TYPE(GetEnv.getInstance().setEnvVariable().get("WAIT_TYPE")),
+    BROWSER(GetEnv.getInstance().setEnvVariable().get("BROWSER")),
+    DATE_FORMAT(GetEnv.getInstance().setEnvVariable().get("DATE_FORMAT"));
 
     private String value;
 

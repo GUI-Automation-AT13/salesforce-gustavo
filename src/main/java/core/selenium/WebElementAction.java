@@ -1,5 +1,6 @@
 package core.selenium;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
@@ -29,11 +30,21 @@ public class WebElementAction {
      * Sets a value in a webElement.
      *
      * @param webElement type WebElement object
-     * @param text is string with value to set
+     * @param text       is string with value to set
      */
     public void setInputField(final WebElement webElement, final String text) {
         waitForElementVisibility(webElement);
         webElement.sendKeys(text);
+    }
+
+    /**
+     * Sets a value in a webElement.
+     *
+     * @param selector type selector object
+     * @param text     is string with value to set
+     */
+    public void setInputField(final By selector, final String text) {
+        WebDriverManager.getInstance().getDriver().findElement(selector).sendKeys(text);
     }
 
     /**
@@ -57,14 +68,43 @@ public class WebElementAction {
     }
 
     /**
+     * Gets the text of a web element.
+     *
+     * @param field web element to get text.
+     */
+    public void clickByXpath(final String field) {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(field)));
+        WebDriverManager.getInstance().getDriver().findElement(By.xpath(field)).click();
+    }
+
+    /**
+     * Gets the text of a web element.
+     *
+     * @param field web element to get text.
+     * @return web element's text
+     */
+    public String getTextOfElementByField(final String field) {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(field)));
+        return  WebDriverManager.getInstance().getDriver().findElement(By.xpath(field)).getText();
+    }
+
+    /**
      * Selects a comboBox by webElement.
      *
      * @param webElement type WebElement object.
-     * @param webDriver is WebDriver.
      */
-    public void selectComboBox(final WebElement webElement, final WebDriver webDriver) {
-        Actions builder = new Actions(webDriver);
+    public void selectByAction(final WebElement webElement) {
+        Actions builder = new Actions(WebDriverManager.getInstance().getDriver());
         Action action = builder.click(webElement).build();
         action.perform();
+    }
+
+    /**
+     * Gets current url.
+     *
+     * @return a String with current url.
+     */
+    public String getCurrentUrl() {
+        return WebDriverManager.getInstance().getDriver().getCurrentUrl();
     }
 }

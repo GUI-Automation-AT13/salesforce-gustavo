@@ -3,7 +3,7 @@ package salesforce;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import salesforce.classic.WorkTypeClassicPage;
-import salesforce.lightning.WorkTypeLightningPage;
+import salesforce.lightning.WorkTypePage;
 import salesforce.utilities.Urls;
 
 public class LoginPage extends BasePage {
@@ -61,8 +61,8 @@ public class LoginPage extends BasePage {
      *
      * @return workTypeLightningPage is work type page in lightning
      */
-    public WorkTypeLightningPage goToLightning() {
+    public WorkTypePage goToLightning() {
         driver.get(Urls.WORK_TYPE_LIGHTNING.getValue());
-        return new WorkTypeLightningPage();
+        return new WorkTypePage();
     }
 }

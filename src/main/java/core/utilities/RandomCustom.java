@@ -1,6 +1,7 @@
 package core.utilities;
 
-import utilities.CalendarManager;
+import core.utilities.date.CalendarManager;
+
 import java.util.UUID;
 
 public final class RandomCustom {
@@ -24,7 +25,7 @@ public final class RandomCustom {
      */
     private static String generateDate() {
         CalendarManager calendarManager = new CalendarManager();
-        return calendarManager.generateDateActual("yyyy-MM-dd HH:mm");
+        return calendarManager.generateDateActual(" yyyy-MM-dd HH:mm ");
     }
 
     /**
@@ -34,6 +35,6 @@ public final class RandomCustom {
      */
     private static String generateFourRandom() {
         String[] uniqueID = UUID.randomUUID().toString().split("-");
-        return " " + uniqueID[2];
+        return uniqueID[2];
     }
 }

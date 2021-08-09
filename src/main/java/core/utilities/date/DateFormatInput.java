@@ -1,4 +1,4 @@
-package utilities;
+package core.utilities.date;
 
 public enum DateFormatInput {
     years_ago("year", false),

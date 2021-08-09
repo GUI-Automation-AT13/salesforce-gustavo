@@ -1,4 +1,7 @@
-package utilities;
+package core.utilities.date;
+
+import core.utilities.date.DateFormatInput;
+import salesforce.utilities.SetUp;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,11 +11,10 @@ import java.text.DateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static core.utilities.GetEnv.envVariable;
 
 public class CalendarManager {
     private String dateActualComplete;
-    private String dataFormat = envVariable().get("DATE_FORMAT");
+    private final String dataFormat = SetUp.DATE_FORMAT.getValue();
     private Date date;
     private Calendar calendarDate;
     private int dates;
